@@ -4,6 +4,18 @@ Exercise solutions and cmake projects for:
 
    * AC++11-501 Advanced Modern C++ for Embedded Developers (C++11/14/17)
 
+**Contents**
+- [Advanced Modern C++ for Embedded Developers (C++11/14/17) Exercises](#advanced-modern-c-for-embedded-developers-c111417-exercises)
+- [Folder structure](#folder-structure)
+  - [Solutions](#solutions)
+  - [Workspace](#workspace)
+- [Build Toolchain](#build-toolchain)
+  - [Build the application](#build-the-application)
+  - [Visual Studio shortcuts](#visual-studio-shortcuts)
+  - [Command line builds](#command-line-builds)
+  - [Building an exercise solution](#building-an-exercise-solution)
+- [Disclaimer](#disclaimer)
+
 # Folder structure
 
 ## Solutions

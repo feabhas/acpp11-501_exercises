@@ -7,7 +7,7 @@
 #include "Peripherals.h"
 #include "Timer.h"
 
-constexpr uint32_t GPIOD_BASE {0x40020C00u};
+constexpr uintptr_t GPIOD_BASE {0x40020C00u};
 
 static volatile uint32_t *const GPIOD_moder {reinterpret_cast<uint32_t*>(GPIOD_BASE)};
 static volatile uint32_t *const GPIOD_outr {reinterpret_cast<uint32_t*>(GPIOD_BASE + 0x14u)};

@@ -18,8 +18,8 @@ namespace WMS {
     public:
         WashStep(Type step_type, std::uint32_t duration, Devices::Motor& motor);
 
-        Step* clone() const override {
-            return new WashStep{*this};
+        std::unique_ptr<Step> clone() const override {
+            return std::make_unique<WashStep>(*this);
         }
 
         void run() override;

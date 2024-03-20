@@ -8,6 +8,7 @@
 
 #include <cstdint>
 #include <string_view>
+#include <memory>
 
 namespace WMS
 {
@@ -19,8 +20,8 @@ namespace WMS
     Step(Type step_type, uint32_t step_length);
     virtual ~Step() = default;
 
-    virtual Step* clone() const {
-        return new Step{*this};
+    virtual std::unique_ptr<Step> clone() const {
+        return std::make_unique<Step>(*this);
     }
 
     Type get_type() const { return type; }

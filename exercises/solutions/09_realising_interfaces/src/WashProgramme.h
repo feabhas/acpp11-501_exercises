@@ -23,7 +23,7 @@ namespace WMS {
         friend void connect(WashProgramme& wp, Devices::OutputDevice& display);
 
     private:
-        constexpr static unsigned num_steps { 15 };
+        constexpr static unsigned num_steps { 16 };
         using container = std::array<Step*, num_steps>;
         container steps { };
         container::iterator next { std::begin(steps) };

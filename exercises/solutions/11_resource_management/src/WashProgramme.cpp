@@ -13,7 +13,7 @@ namespace WMS {
 
     WashProgramme::WashProgramme()
     {
-        steps.reserve(15);
+        steps.reserve(16);
     }
 
 

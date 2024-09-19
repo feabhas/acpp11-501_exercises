@@ -41,6 +41,8 @@ int main()
     white_wash.add(&dry);
     white_wash.add(&complete);
 
+    std::cout << "Wash duration " << white_wash.duration()/1000.0 << " seconds\n";
+
     connect(white_wash, display);
     white_wash.run();
     display.blank();

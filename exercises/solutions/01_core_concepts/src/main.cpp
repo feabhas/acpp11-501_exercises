@@ -8,8 +8,9 @@
 
 enum class StepType { invalid, empty, fill, heat, wash, rinse, spin, dry, complete };
 
+constexpr std::size_t num_steps = 9;
 
-static constexpr std::string_view names[9] = {
+static constexpr std::string_view names[num_steps] = {
     "invalid", "empty", "fill",
     "heat",    "wash",  "rinse",
     "spin",    "dry",   "complete"

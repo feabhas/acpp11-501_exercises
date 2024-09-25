@@ -2,52 +2,55 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#include <iostream>
-#include <cstdint>
-#include "Timer.h"
-#include "Step.h"
+#include "Console.h"
 #include "GPIO.h"
-#include "SevenSegment.h"
 #include "Motor.h"
+#include "SevenSegment.h"
+#include "Step.h"
+#include "Timer.h"
 #include "WashProgramme.h"
 #include "WashStep.h"
-#include "Console.h"
+#include <cstdint>
+#include <iostream>
 
 using WMS::Step;
 using WMS::WashStep;
 
-int main()
-{
-    Devices::GPIO gpiod {STM32F407::AHB1_Device::GPIO_D};
-    Devices::SevenSegment display{ gpiod};
-    Devices::Motor motor{ gpiod};
+int main() {
+  Devices::GPIO gpiod{STM32F407::AHB1_Device::GPIO_D};
+  Devices::SevenSegment display{gpiod};
+  Devices::Motor motor{gpiod};
 
-    Step empty     {Step::Type::empty,     500};
-    Step fill      {Step::Type::fill,     1000};
-    Step heat      {Step::Type::heat,     2000};
-    WashStep wash  {Step::Type::wash,     2500, motor};
-    WashStep rinse {Step::Type::rinse,    2000, motor};
-    WashStep spin  {Step::Type::spin,     3000, motor};
-    WashStep dry   {Step::Type::dry,      2400, motor};
-    Step complete  {Step::Type::complete,  500};
+  Step empty{Step::Type::empty, 500};
+  Step fill{Step::Type::fill, 1000};
+  Step heat{Step::Type::heat, 2000};
+  WashStep wash{Step::Type::wash, 2500, motor};
+  WashStep rinse{Step::Type::rinse, 2000, motor};
+  WashStep spin{Step::Type::spin, 3000, motor};
+  WashStep dry{Step::Type::dry, 2400, motor};
+  Step complete{Step::Type::complete, 500};
 
-    WMS::WashProgramme white_wash {};
-    white_wash.add(&empty);
-    white_wash.add(&fill);
-    white_wash.add(&heat);
-    white_wash.add(&wash);
-    white_wash.add(&rinse);
-    white_wash.add(&spin);
-    white_wash.add(&dry);
-    white_wash.add(&complete);
+  WMS::WashProgramme colour_wash{};
+  connect(colour_wash, display);
 
-    connect(white_wash, display);
-    white_wash.run();
-    display.blank();
+  colour_wash.add(fill);
+  colour_wash.add(heat);
+  colour_wash.add(wash);
+  colour_wash.add(empty);
+  colour_wash.add(fill);
+  colour_wash.add(rinse);
+  colour_wash.add(empty);
+  colour_wash.add(spin);
+  colour_wash.add(dry);
+  colour_wash.add(complete);
 
-    Devices::Console console {};
-    connect (white_wash, console);
-    white_wash.run();
+  connect(colour_wash, display);
+  colour_wash.run();
+  display.blank();
 
-    sleep(2000);
+  Devices::Console console{};
+  connect(colour_wash, console);
+  colour_wash.run();
+
+  sleep(2000);
 }

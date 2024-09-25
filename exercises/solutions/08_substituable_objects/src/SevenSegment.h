@@ -1,8 +1,6 @@
 // SevenSegment.h
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
-
-#pragma once
 #ifndef SEVENSEGMENT_H
 #define SEVENSEGMENT_H
 
@@ -10,17 +8,17 @@
 
 namespace Devices {
 
-    class SevenSegment {
-    public:
-        SevenSegment(GPIO& gpio);
-        ~SevenSegment();
-        void display(unsigned int value);
-        void blank();
-    private:
-        GPIO& gpio;
-    };
+class SevenSegment {
+public:
+  SevenSegment(GPIO &gpio);
+  ~SevenSegment();
+  void display(unsigned int value);
+  void blank();
 
+private:
+  GPIO &gpio;
+};
 
-}  // namespace Devices
+} // namespace Devices
 
 #endif // SEVENSEGMENT_H_

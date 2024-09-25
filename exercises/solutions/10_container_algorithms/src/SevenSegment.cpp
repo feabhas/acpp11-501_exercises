@@ -6,34 +6,24 @@
 
 namespace Devices {
 
-    enum class LED {A=8, B, C, D};
+enum LED : unsigned { A = 8, B, C, D };
 
-    SevenSegment::SevenSegment(GPIO& gpio)
-    : gpio{gpio}
-    {
-        for (unsigned pin = static_cast<unsigned>(LED::A); pin <= static_cast<unsigned>(LED::D); ++pin) {
-            gpio.set_output(pin);
-        }
-        blank();
-    }
+SevenSegment::SevenSegment(GPIO &gpio) : gpio{gpio} {
+  gpio.set_output(LED::A);
+  gpio.set_output(LED::B);
+  gpio.set_output(LED::C);
+  gpio.set_output(LED::D);
+  blank();
+}
 
+SevenSegment::~SevenSegment() { blank(); }
 
-    SevenSegment::~SevenSegment()
-    {
-        blank();
-    }
+void SevenSegment::display(unsigned value) {
+  value &= 0xFu;
+  gpio.clear(0xFu << LED::A);
+  gpio.set(value << LED::A);
+}
 
+void SevenSegment::blank() { display(15); }
 
-    void SevenSegment::display(unsigned value)
-    {
-        gpio.clear(0xFu << static_cast<unsigned>(LED::A));
-        gpio.set(value << static_cast<unsigned>(LED::A));
-    }
-
-
-    void SevenSegment::blank()
-    {
-        display(15);
-    }
-
-}  // namespace Devices
+} // namespace Devices

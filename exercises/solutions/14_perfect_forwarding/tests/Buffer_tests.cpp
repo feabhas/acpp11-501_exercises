@@ -13,13 +13,13 @@ TEST_CASE("Testing empty state") {
 
 TEST_CASE("Testing single element add/get") {
     Utility::Buffer<unsigned, 10> buffer{};
-    CHECK(buffer.add(42U));
+    CHECK(buffer.add(42u));
     CHECK_EQ(buffer.size(), 1);
     CHECK_FALSE(buffer.is_empty());
     
     auto value = buffer.get();
     CHECK(value.has_value());
-    CHECK_EQ(value.value(), 42U);
+    CHECK_EQ(value.value(), 42u);
     CHECK(buffer.is_empty());
 }
 
@@ -27,19 +27,19 @@ TEST_CASE("Testing fill and empty cycle") {
     Utility::Buffer<unsigned, 3> buffer{};
     
     // Fill buffer
-    CHECK(buffer.add(1U));
-    CHECK(buffer.add(2U));
-    CHECK(buffer.add(3));
-    CHECK_FALSE(buffer.add(4));  // Should fail, buffer full
+    CHECK(buffer.add(1u));
+    CHECK(buffer.add(2u));
+    CHECK(buffer.add(3u));
+    CHECK_FALSE(buffer.add(4u));  // Should fail, buffer full
     CHECK_EQ(buffer.size(), 3);
 
     // Empty buffer
     auto val1 = buffer.get();
     auto val2 = buffer.get();
     auto val3 = buffer.get();
-    CHECK_EQ(val1.value(), 1);
-    CHECK_EQ(val2.value(), 2);
-    CHECK_EQ(val3.value(), 3);
+    CHECK_EQ(val1.value(), 1u);
+    CHECK_EQ(val2.value(), 2u);
+    CHECK_EQ(val3.value(), 3u);
     CHECK_FALSE(buffer.get().has_value());  // Should be empty
 }
 
@@ -47,23 +47,23 @@ TEST_CASE("Testing wrap-around behavior") {
     Utility::Buffer<unsigned, 4> buffer{};
     
     // Fill buffer
-    CHECK(buffer.add(1));
-    CHECK(buffer.add(2));
-    CHECK(buffer.add(3));
-    CHECK(buffer.add(4));
+    CHECK(buffer.add(1u));
+    CHECK(buffer.add(2u));
+    CHECK(buffer.add(3u));
+    CHECK(buffer.add(4u));
 
     // Read half
-    CHECK_EQ(buffer.get().value(), 1);
-    CHECK_EQ(buffer.get().value(), 2);
+    CHECK_EQ(buffer.get().value(), 1u);
+    CHECK_EQ(buffer.get().value(), 2u);
     
     // Add more (should wrap around)
-    CHECK(buffer.add(5));
-    CHECK(buffer.add(6));
+    CHECK(buffer.add(5u));
+    CHECK(buffer.add(6u));
     
     // Read all remaining
-    CHECK_EQ(buffer.get().value(), 3);
-    CHECK_EQ(buffer.get().value(), 4);
-    CHECK_EQ(buffer.get().value(), 5);
-    CHECK_EQ(buffer.get().value(), 6);
+    CHECK_EQ(buffer.get().value(), 3u);
+    CHECK_EQ(buffer.get().value(), 4u);
+    CHECK_EQ(buffer.get().value(), 5u);
+    CHECK_EQ(buffer.get().value(), 6u);
     CHECK(buffer.is_empty());
 }

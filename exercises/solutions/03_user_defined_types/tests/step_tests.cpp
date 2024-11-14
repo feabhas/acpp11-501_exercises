@@ -12,8 +12,9 @@
 // The test cases verify both valid and invalid scenarios, 
 // and check all possible step types defined in the enum class.
 
-#define DOCTEST_CONFIG_NO_MULTITHREADING
-#define DOCTEST_CONFIG_NO_POSIX_SIGNALS
+// defined in CMakeLists.txt
+// #define DOCTEST_CONFIG_NO_MULTITHREADING
+// #define DOCTEST_CONFIG_NO_POSIX_SIGNALS
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "Step.h"

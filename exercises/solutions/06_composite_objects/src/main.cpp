@@ -2,25 +2,27 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#include <cstdint>
 #include "GPIO.h"
 #include "Timer.h"
 #include "WashProgramme.h"
+#include <cstdint>
 
 using WMS::Step;
 
-int main()
-{
+int main() {
 
-    WMS::WashProgramme white_wash{};
-    white_wash.add(Step::Type::empty,    500);
-    white_wash.add(Step::Type::fill,    1000);
-    white_wash.add(Step::Type::heat,    2000);
-    white_wash.add(Step::Type::wash,    2500);
-    white_wash.add(Step::Type::rinse,   2000);
-    white_wash.add(Step::Type::spin,    3000);
-    white_wash.add(Step::Type::dry,     2400);
-    white_wash.add(Step::Type::complete, 500);
+  WMS::WashProgramme colour_wash{};
 
-    white_wash.run();
+  colour_wash.add(Step::Type::fill, 1000);
+  colour_wash.add(Step::Type::heat, 1200);
+  colour_wash.add(Step::Type::wash, 1500);
+  colour_wash.add(Step::Type::empty, 500);
+  colour_wash.add(Step::Type::fill, 1000);
+  colour_wash.add(Step::Type::rinse, 2000);
+  colour_wash.add(Step::Type::empty, 500);
+  colour_wash.add(Step::Type::spin, 2000);
+  colour_wash.add(Step::Type::dry, 1400);
+  colour_wash.add(Step::Type::complete, 500);
+
+  colour_wash.run();
 }

@@ -26,14 +26,15 @@ namespace Devices {
 
     void SevenSegment::display(unsigned value)
     {
-        gpio.clear(0xFu << static_cast<unsigned>(LED::A));
+        if (value > 0xFU) return;
+        gpio.clear(0xFU << static_cast<unsigned>(LED::A));
         gpio.set(value << static_cast<unsigned>(LED::A));
     }
 
 
     void SevenSegment::blank()
     {
-        display(15);
+        display(0xFU);
     }
 
 }  // namespace Devices

@@ -18,10 +18,11 @@ int main()
     }
 
     for (unsigned i = 0; i < 10; ++i) {
-        gpiod.clear(0xFu << led_A);
+        gpiod.clear(0xFU << led_A);
         gpiod.set(i << led_A);
         sleep(500);
     }
 
-    gpiod.set(0xFu << led_A);
+    gpiod.set(0xFU << led_A);
+    sleep(500);
 }

@@ -2,7 +2,6 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#pragma once
 #ifndef GPIO_H
 #define GPIO_H
 
@@ -21,8 +20,8 @@ namespace Devices {
         void set(uint32_t pattern);
         void clear(uint32_t pattern);
     private:
-        STM32F407::AHB1_Device device {};
-        volatile struct Registers* port {};
+        STM32F407::AHB1_Device device;
+        volatile struct Registers* port;
     };
 
 

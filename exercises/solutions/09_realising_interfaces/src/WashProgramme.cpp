@@ -10,12 +10,12 @@
 
 namespace WMS {
 
-    bool WashProgramme::add(Step *const step)
+    bool WashProgramme::add(Step& step)
     {
         if (next == std::end(steps)) {
             return false;
         }
-        *next = step;
+        *next = &step;
         ++next;
         return true;
     }

@@ -2,7 +2,6 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#pragma once
 #ifndef WASHPROGRAMME_H
 #define WASHPROGRAMME_H
 
@@ -20,23 +19,17 @@ namespace WMS {
     class WashProgramme {
     public:
         WashProgramme();
+        WashProgramme(std::initializer_list<std::shared_ptr<Step>> step_list);
 
-        WashProgramme(const WashProgramme& rhs);
-        WashProgramme& operator= (const WashProgramme& rhs);
-
-        bool add(std::unique_ptr<Step>);
+        bool add(std::shared_ptr<Step>);
         void run();
         uint32_t duration();
 
         friend void connect(WashProgramme& wp, Devices::OutputDevice& display);
 
     private:
-        friend void swap(WashProgramme& lhs, WashProgramme& rhs);
-
-        using container = std::vector<std::unique_ptr<Step>>;
-
+        using container = std::vector<std::shared_ptr<Step>>;
         container steps { };
-
         Devices::OutputDevice* output {};
     };
 

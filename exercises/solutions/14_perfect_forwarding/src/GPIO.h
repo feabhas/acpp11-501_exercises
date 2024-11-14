@@ -2,39 +2,28 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#pragma once
 #ifndef GPIO_H
 #define GPIO_H
 
-#include <cstdint>
 #include "Peripherals.h"
+#include <cstdint>
 
 namespace Devices {
-    class GPIO {
-    public:
-        explicit GPIO(STM32F407::AHB1_Device device);
-        ~GPIO();
+class GPIO {
+public:
+  explicit GPIO(STM32F407::AHB1_Device device);
+  ~GPIO();
+  void set_input(unsigned pin);
+  void set_output(unsigned pin);
+  uint32_t mode() const;
+  uint32_t read() const;
+  void set(uint32_t pattern);
+  void clear(uint32_t pattern);
 
-        GPIO(const GPIO& rhs) = delete;
-        GPIO& operator=(const GPIO& rhs) = delete;
-
-        GPIO(GPIO&& rhs) noexcept;
-        GPIO& operator=(GPIO&& rhs) noexcept;
-
-        void set_input(unsigned pin);
-        void set_output(unsigned pin);
-        uint32_t mode() const;
-        uint32_t read() const;
-        void set(uint32_t pattern);
-        void clear(uint32_t pattern);
-
-    private:
-        STM32F407::AHB1_Device device {};
-        volatile struct Registers* port {};
-
-        friend void swap(GPIO& lhs, GPIO& rhs);
-    };
-
+private:
+  STM32F407::AHB1_Device device;
+  volatile struct Registers *port;
+};
 
 } // namespace Devices
 

@@ -7,9 +7,8 @@
 
 namespace Devices {
 
-void Console::display(unsigned int value)
-{
+void Console::display(unsigned int value) {
   std::cout << "running Step " << value << '\n';
 }
 
-} // namespace
+} // namespace Devices

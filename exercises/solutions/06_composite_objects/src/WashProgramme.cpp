@@ -22,7 +22,7 @@ namespace WMS {
 
     void WashProgramme::run()
     {
-        for (auto step: steps) {
+        for (auto& step: steps) {
             if (step.is_valid()) {
                 std::cout << "Wash step " << unsigned(step.get_type()) << '\n';
                 step.run();

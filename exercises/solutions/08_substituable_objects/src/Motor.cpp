@@ -26,19 +26,19 @@ namespace Devices
 
     void Motor::on()
     {
-        gpio.set(0x1u << static_cast<unsigned>(Pin::on));
+        gpio.set(0x1U << static_cast<unsigned>(Pin::on));
     }
 
 
     void Motor::off()
     {
-        gpio.clear(0x1u << static_cast<unsigned>(Pin::on));
+        gpio.clear(0x1U << static_cast<unsigned>(Pin::on));
     }
 
 
     void Motor::change_direction()
     {
-        constexpr unsigned mask {0x1u << static_cast<unsigned>(Pin::dir)};
+        constexpr unsigned mask {0x1U << static_cast<unsigned>(Pin::dir)};
         if (gpio.read() & mask) {
             gpio.clear(mask);
         }

@@ -6,13 +6,14 @@
 
 using WMS::Step;
 
-int main()
-{
-  Step fill{ Step::Type::fill, 500 };
-  Step wash{ Step::Type::wash, 1000 };
-  Step empty{ Step::Type::empty, 2000 };
+int main() {
+  Step fill{Step::Type::fill, 500};
+  Step wash{Step::Type::wash, 1000};
+  Step empty{Step::Type::empty, 2000};
+  Step invalid{};
 
   fill.run();
   wash.run();
   empty.run();
+  invalid.run();
 }

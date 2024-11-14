@@ -2,7 +2,6 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#pragma once
 #ifndef WASHSTEP_H
 #define WASHSTEP_H
 
@@ -21,7 +20,7 @@ namespace WMS {
         void run() override;
 
     private:
-        Devices::Motor* motor { nullptr };
+        Devices::Motor* motor { };
     };
 
 }  // namespace WMS

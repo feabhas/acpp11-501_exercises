@@ -2,7 +2,6 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#pragma once
 #ifndef WASHPROGRAMME_H
 #define WASHPROGRAMME_H
 
@@ -13,6 +12,7 @@ namespace WMS {
 
     class WashProgramme {
     public:
+        WashProgramme() = default;
         bool add(Step::Type step_type, std::uint32_t duration);
         void run();
 

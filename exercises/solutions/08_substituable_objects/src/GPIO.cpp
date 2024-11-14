@@ -14,12 +14,13 @@ namespace Devices {
         uint32_t pull_up_down;
         uint32_t input;
         uint32_t output;
-        // not used
-        // uint32_t bit_set_reset;
-        // uint32_t lock;
-        // uint32_t alt_fn_low;
-        // uint32_t alt_fn_high;
+        uint32_t bit_set_reset;
+        uint32_t lock;
+        uint32_t alt_fn_low;
+        uint32_t alt_fn_high;
     };
+
+    static_assert(sizeof(Registers) == 40, "Register map incorrect");
 
     GPIO::GPIO(STM32F407::AHB1_Device device)
     : device{device},
@@ -36,37 +37,33 @@ namespace Devices {
 
     void GPIO::set_input(unsigned pin)
     {
-        port->mode &= ~(0x3u << pin*2);
+        if (pin > 15) return;
+        port->mode &= ~(0x3U << pin*2);
         // C++20 only
         // auto moder = port->mode;
-        // moder &= ~(0x3u << pin*2);
+        // moder &= ~(0x3U << pin*2);
         // port->mode = moder;
     }
 
     void GPIO::set_output(unsigned pin)
     {
+        if (pin > 15) return;
         auto moder = port->mode;
-        moder &= ~(0x3u << pin*2);
-        moder |= (0x1u << pin*2);
+        moder &= ~(0x3U << pin*2);
+        moder |= (0x1U << pin*2);
         port->mode = moder;
     }
 
     void GPIO::set(uint32_t pattern)
     {
+        pattern &= 0xFFFF;
         port->output |= pattern;
-        // C++20 only
-        // uint32_t value = port->output;
-        // value |= pattern;
-        // port->output = value;
     }
 
     void GPIO::clear(uint32_t pattern)
     {
+        pattern &= 0xFFFF;
         port->output &= ~pattern;
-        // C++20 only
-        // uint32_t value = port->output;
-        // value &= ~pattern;
-        // port->output = value;
     }
 
     uint32_t GPIO::mode() const
@@ -76,7 +73,7 @@ namespace Devices {
 
     uint32_t GPIO::read() const
     {
-        return port->input;
+        return port->input & 0xFFFF;
     }
 
 

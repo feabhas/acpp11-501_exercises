@@ -2,7 +2,6 @@
 // See project README.md for disclaimer and additional information.
 // Feabhas Ltd
 
-#pragma once
 #ifndef WASHPROGRAMME_H
 #define WASHPROGRAMME_H
 
@@ -17,7 +16,8 @@ namespace WMS {
 
     class WashProgramme {
     public:
-        bool add(Step *const step);
+        WashProgramme() = default;
+        bool add(Step& step);
         void run();
 
         friend void connect(WashProgramme& wp, Devices::SevenSegment& display);

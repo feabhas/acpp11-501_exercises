@@ -16,31 +16,14 @@ namespace WMS {
         steps.reserve(16);
     }
 
-    WashProgramme::WashProgramme(const WashProgramme& rhs)
-    : output{rhs.output}
+    WashProgramme::WashProgramme(std::initializer_list<std::shared_ptr<Step>> step_list)
+        : steps{step_list}
     {
-        for (auto& src: rhs.steps) {
-            steps.push_back(std::unique_ptr<Step>{src->clone()});
-        }
     }
 
-    WashProgramme& WashProgramme::operator= (const WashProgramme& rhs)
+    bool WashProgramme::add(std::shared_ptr<Step> step)
     {
-        WashProgramme temp {rhs};
-        swap(*this, temp);
-        return *this;
-    }
-
-    void swap(WashProgramme& lhs, WashProgramme& rhs)
-    {
-        using std::swap;
-        swap(lhs.steps, rhs.steps);
-        swap(lhs.output, rhs.output);
-    }
-
-    bool WashProgramme::add(std::unique_ptr<Step> step)
-    {
-        steps.push_back(std::move(step));
+        steps.push_back(step);
         return true;
     }
 
